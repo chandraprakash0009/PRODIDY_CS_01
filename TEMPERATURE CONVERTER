@@ -1,97 +1,54 @@
-                TASK 1
-import java.util.Scanner;
+# Function to encrypt the message
+def encrypt(message, shift):
+    encrypted_message = ""
+    
+    # Traverse the message character by character
+    for char in message:
+        if char.isalpha():  # Check if the character is a letter
+            shift_amount = 65 if char.isupper() else 97
+            # Shift the character and wrap around using modulo 26
+            encrypted_message += chr((ord(char) - shift_amount + shift) % 26 + shift_amount)
+        else:
+            # If the character is not a letter, leave it unchanged
+            encrypted_message += char
+    
+    return encrypted_message
 
-public class TemperatureConverter {
+# Function to decrypt the message
+def decrypt(message, shift):
+    decrypted_message = ""
+    
+    # Traverse the message character by character
+    for char in message:
+        if char.isalpha():  # Check if the character is a letter
+            shift_amount = 65 if char.isupper() else 97
+            # Reverse the shift and wrap around using modulo 26
+            decrypted_message += chr((ord(char) - shift_amount - shift) % 26 + shift_amount)
+        else:
+            # If the character is not a letter, leave it unchanged
+            decrypted_message += char
+    
+    return decrypted_message
 
-    // Method to convert Celsius to Fahrenheit
-    public static double celsiusToFahrenheit(double celsius) {
-        return (celsius * 9/5) + 32;
-    }
+# Main program
+def main():
+    print("Caesar Cipher Program")
+    
+    # User inputs
+    choice = input("Type 'e' to encrypt or 'd' to decrypt: ").lower()
+    message = input("Enter the message: ")
+    shift = int(input("Enter the shift value (1-25): "))
+    
+    # Encrypt or decrypt based on the user's choice
+    if choice == 'e':
+        encrypted = encrypt(message, shift)
+        print("Encrypted Message:", encrypted)
+    elif choice == 'd':
+        decrypted = decrypt(message, shift)
+        print("Decrypted Message:", decrypted)
+    else:
+        print("Invalid choice! Please type 'e' to encrypt or 'd' to decrypt.")
 
-    // Method to convert Celsius to Kelvin
-    public static double celsiusToKelvin(double celsius) {
-        return celsius + 273.15;
-    }
-
-    // Method to convert Fahrenheit to Celsius
-    public static double fahrenheitToCelsius(double fahrenheit) {
-        return (fahrenheit - 32) * 5/9;
-    }
-
-    // Method to convert Fahrenheit to Kelvin
-    public static double fahrenheitToKelvin(double fahrenheit) {
-        return (fahrenheit - 32) * 5/9 + 273.15;
-    }
-
-    // Method to convert Kelvin to Celsius
-    public static double kelvinToCelsius(double kelvin) {
-        return kelvin - 273.15;
-    }
-
-    // Method to convert Kelvin to Fahrenheit
-    public static double kelvinToFahrenheit(double kelvin) {
-        return (kelvin - 273.15) * 9/5 + 32;
-    }
-
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Temperature Converter");
-        
-        // Options to select conversion type
-        System.out.println("Select the conversion you want to perform:");
-        System.out.println("1. Celsius to Fahrenheit");
-        System.out.println("2. Celsius to Kelvin");
-        System.out.println("3. Fahrenheit to Celsius");
-        System.out.println("4. Fahrenheit to Kelvin");
-        System.out.println("5. Kelvin to Celsius");
-        System.out.println("6. Kelvin to Fahrenheit");
-        
-        int choice = scanner.nextInt();
-        double inputTemperature, result;
-
-        // Perform selected conversion
-        switch (choice) {
-            case 1:
-                System.out.print("Enter temperature in Celsius: ");
-                inputTemperature = scanner.nextDouble();
-                result = celsiusToFahrenheit(inputTemperature);
-                System.out.println("Temperature in Fahrenheit: " + result);
-                break;
-            case 2:
-                System.out.print("Enter temperature in Celsius: ");
-                inputTemperature = scanner.nextDouble();
-                result = celsiusToKelvin(inputTemperature);
-                System.out.println("Temperature in Kelvin: " + result);
-                break;
-            case 3:
-                System.out.print("Enter temperature in Fahrenheit: ");
-                inputTemperature = scanner.nextDouble();
-                result = fahrenheitToCelsius(inputTemperature);
-                System.out.println("Temperature in Celsius: " + result);
-                break;
-            case 4:
-                System.out.print("Enter temperature in Fahrenheit: ");
-                inputTemperature = scanner.nextDouble();
-                result = fahrenheitToKelvin(inputTemperature);
-                System.out.println("Temperature in Kelvin: " + result);
-                break;
-            case 5:
-                System.out.print("Enter temperature in Kelvin: ");
-                inputTemperature = scanner.nextDouble();
-                result = kelvinToCelsius(inputTemperature);
-                System.out.println("Temperature in Celsius: " + result);
-                break;
-            case 6:
-                System.out.print("Enter temperature in Kelvin: ");
-                inputTemperature = scanner.nextDouble();
-                result = kelvinToFahrenheit(inputTemperature);
-                System.out.println("Temperature in Fahrenheit: " + result);
-                break;
-            default:
-                System.out.println("Invalid choice!");
-                break;
-        }
-
-        scanner.close();
-    }
-}
+# Run the program
+if __name__ == "__main__":
+    main()
